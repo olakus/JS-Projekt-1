@@ -181,7 +181,7 @@ h2 {
         flex-direction: row;
         align-items: center;
     }
-} */
+} 
 
 footer {
   display: flex;
@@ -194,3 +194,4 @@ footer {
   color: var(--white);
   font-size: var(--font-s);
 }
+*/
