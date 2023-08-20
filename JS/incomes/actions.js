@@ -1,6 +1,8 @@
 "use strict";
 
-import { incomeName, incomeValue, incomesList } from "./main.js";
+import { incomeName, incomeValue, incomesList } from "../main.js";
+import { expenseName, expenseValue, expensesList } from "../main.js"; // dopisałam
+import { addIncomeToList, addExpenseToList } from "./updates.js";
 
 export let incomes = [];
 
@@ -14,17 +16,30 @@ export const addIncome = (e) => {
   };
 
   incomes.push(_income);
-  // addIncomeToList(_income);
-  renderIncomesList();
+  addIncomeToList(_income);
+  // renderIncomesList();
 
   incomeName.value = "";
   incomeValue.value = "";
 };
 
-export const deleteIncome = (e) => {
-  e.preventDefault();
-  const idToDelete = e.target.id;
-  incomes = incomes.filter((el) => el.id !== idToDelete);
+// EXPENSES (DOPISAŁAM)
 
-  renderIncomesList();
+export let expense = []; // expense czy expenses?
+
+export const addExpense = (e) => {
+  e.preventDefault();
+
+  const _expense = {
+    name: expenseName.value,
+    value: Number(expenseName.value),
+    id: Math.random().toString,
+  };
+
+  expense.push(_expense);
+  addExpenseToList(_expense);
+  // renderIncomesList();
+
+  expenseName.value = "";
+  expenseName.value = ""; // czemu jest to samo dwa razy?
 };

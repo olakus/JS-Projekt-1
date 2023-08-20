@@ -18,7 +18,7 @@
     <main class="container">
       <header>
         <h1 class="text--center">Home budget</h1>
-        <div class="app__logo"><img src="./budget.png" /></div>
+        <div class="app__logo"><img src="./pig_savings_1.jpg" /></div>
         <div id="budgetState" class="budget__state budget__state--success">
           <p class="text--center">
             You can still spend <span id="budgetValue">987</span> PLN
@@ -33,11 +33,17 @@
               type="text"
               id="income-name"
               class="budget__list__form__input budget__list__form__input--text"
+              minlength="3"
+              required
             />
+
             <input
               type="number"
               id="income-value"
               class="budget__list__form__input budget__list__form__input--number"
+              min="0.01"
+              step="0.01"
+              required
             />
             <input
               type="submit"
@@ -46,55 +52,26 @@
               class="budget__list__form__input__button"
             />
           </form>
-          <ul id="incomes-list-container" class="budget__list">
-            <!-- A SAMPLE BUDGET LIST INCOME ITEM -->
-            <li class="flex flex--space-between budget__list__item">
-              <p>Text input value <span>number input value</span> PLN</p>
-              <div class="budget__list__item__buttons__wrapper">
-                <button
-                  class="budget__list__item__button budget__list__item__button--edit"
-                >
-                  Edit
-                </button>
-                <button
-                  class="budget__list__item__button budget__list__item__button--delete"
-                >
-                  Delete
-                </button>
-              </div>
-            </li>
-            <li class="flex flex--space-between budget__list__item">
-              <p>Text input value <span>number input value</span> PLN</p>
-              <div class="budget__list__item__buttons__wrapper">
-                <button
-                  class="budget__list__item__button budget__list__item__button--edit"
-                >
-                  Edit
-                </button>
-                <button
-                  class="budget__list__item__button budget__list__item__button--delete"
-                >
-                  Delete
-                </button>
-              </div>
-            </li>
-          </ul>
+          <ul id="incomes-list-container" class="budget__list"></ul>
           <p class="budget__list__summary">
             Incomes sum: <span id="incomes-sum">5500</span> PLN
           </p>
         </div>
         <div class="budget__expenses">
           <h2 class="budget__list__header expenses__header">Expenses</h2>
-          <form id="expenseForm" class="budget__list__form">
+          <form id="expenses-list" class="budget__list__form">
             <input
               type="text"
-              id="expenseTitle"
+              id="expense-name"
               class="budget__list__form__input budget__list__form__input--text"
             />
             <input
               type="number"
-              id="expenseValue"
+              id="expense-value"
               class="budget__list__form__input budget__list__form__input--number"
+              min="0.01"
+              step="0.01"
+              required
             />
             <input
               type="submit"
@@ -104,7 +81,7 @@
           </form>
           <ul id="expensesList" class="budget__list">
             <!-- A SAMPLE BUDGET LIST EXPENSE ITEM -->
-            <li class="flex flex--space-between budget__list__item">
+            <!-- <li class="flex flex--space-between budget__list__item">
               <p>Text input value <span>number input value</span> PLN</p>
               <div class="budget__list__item__buttons__wrapper">
                 <button
@@ -133,7 +110,7 @@
                   Delete
                 </button>
               </div>
-            </li>
+            </li> -->
           </ul>
           <p class="budget__list__summary">
             Expenses sum: <span id="outcomes-sum">5500</span> PLN
