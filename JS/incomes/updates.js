@@ -1,5 +1,9 @@
-import { incomesListContainer } from "../main.js";
-import { incomes } from "./actions.js";
+import {
+  incomesListContainer,
+  expensesListContainer,
+  editForm,
+} from "../main.js";
+import { incomes, expenses } from "./actions.js";
 
 const deleteIncome = (e) => {
   console.log(e.target.id);
@@ -7,6 +11,10 @@ const deleteIncome = (e) => {
   const itemToDeleteIndex = incomes.findIndex((el) => el.id === idToDelete);
   incomes.splice(itemToDeleteIndex, 1);
   renderIncomesList();
+};
+
+const editIncome = (e) => {
+  editForm.style.display = "flex";
 };
 
 export const addIncomeToList = (income) => {
@@ -22,7 +30,7 @@ export const addIncomeToList = (income) => {
   name.innerText = income.name;
 
   const value = document.createElement("p");
-  value.innerText = income.value;
+  value.innerText = income.value + " PLN";
 
   const buttonsWrapper = document.createElement("div");
   buttonsWrapper.classList.add(
@@ -33,10 +41,11 @@ export const addIncomeToList = (income) => {
   const editButton = document.createElement("button");
   editButton.innerText = "Edytuj";
   editButton.type = "button";
+  editButton.addEventListener("click", editIncome);
 
   const removeButton = document.createElement("button");
   removeButton.type = "button";
-  removeButton.id = income.id; // CZY MOGE UŻYC TEN REMOVE BUTTON TEŻ W EXPENSES?
+  removeButton.id = income.id; // CZY MOGE UŻYC TEN REMOVE BUTTON TEŻ W EXPENSES? odp: TAK
   removeButton.innerText = "Usuń";
   removeButton.addEventListener("click", deleteIncome);
 
@@ -62,15 +71,15 @@ const deleteExpense = (e) => {
   console.log(e.target.id);
   const idToDelete = e.target.id;
   const itemToDeleteIndex = expenses.findIndex((el) => el.id === idToDelete);
-  // jest też const itemToDeleteIndex dla incomes. czy może tak być?
-  incomes.splice(itemToDeleteIndex, 1);
+  // jest też const itemToDeleteIndex dla incomes. czy może tak być? odp: TAK
+  expenses.splice(itemToDeleteIndex, 1);
   renderExpensesList();
 };
 
 const renderExpensesList = () => {
-  incomesListContainer.innerHTML = "";
-  incomes.forEach((income) => {
-    addIncomeToList(income);
+  expensesListContainer.innerHTML = "";
+  expenses.forEach((expense) => {
+    addExpenseToList(expense);
   });
 };
 
@@ -83,13 +92,13 @@ export const addExpenseToList = (expense) => {
   );
   listElement.id = expense.id;
 
-  const name = document.createElement("p"); // jest inne const name w addIncomeToList
+  const name = document.createElement("p");
   name.innerText = expense.name;
 
-  const value = document.createElement("p"); // jest inne const value w addIncomeToList
-  value.innerText = expense.value;
+  const value = document.createElement("p");
+  value.innerText = expense.value + " PLN";
 
-  const buttonsWrapper = document.createElement("div"); // jest to samo co w addIncomeToList
+  const buttonsWrapper = document.createElement("div");
   buttonsWrapper.classList.add(
     "budget__list__item__button",
     "budget__list__item__button--edit"
@@ -110,7 +119,7 @@ export const addExpenseToList = (expense) => {
   buttonsWrapper.appendChild(editButton);
   buttonsWrapper.appendChild(removeButton);
   listElement.appendChild(buttonsWrapper);
-  incomesListContainer.appendChild(listElement);
+  expensesListContainer.appendChild(listElement);
 };
 
 // ------------------------

@@ -24,7 +24,7 @@ main {
 }
 
 .container {
-  width: 100%;
+  width: 80%;
   margin: 0 auto;
   padding: 30px 10px;
 }
@@ -199,9 +199,31 @@ footer {
   justify-content: center;
   padding: 20px;
 }
+*/
 
-.icon__credentials {
+/* .icon__credentials {
   color: var(--white);
   font-size: var(--font-s);
+} */
+
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-s);
+  padding: 20px;
 }
-*/
+
+.edit-form {
+  position: fixed;
+  display: none;
+  flex-direction: column;
+  gap: 20px;
+  width: 300px;
+  padding: 40px;
+  border: 1px solid grey;
+  background-color: white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
