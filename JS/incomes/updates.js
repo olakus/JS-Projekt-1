@@ -1,7 +1,11 @@
+"use strict";
+
 import {
   incomesListContainer,
   expensesListContainer,
   editForm,
+  incomesList,
+  incomesSum,
 } from "../main.js";
 import { incomes, expenses } from "./actions.js";
 
@@ -55,6 +59,16 @@ export const addIncomeToList = (income) => {
   buttonsWrapper.appendChild(removeButton);
   listElement.appendChild(buttonsWrapper);
   incomesListContainer.appendChild(listElement);
+
+  calculateIncomesSum();
+};
+
+const calculateIncomesSum = () => {
+  const _incomesSum = incomes.reduce((acc, income) => {
+    return acc + income;
+  }, 0);
+
+  incomesSum.innerText = _incomesSum;
 };
 
 const renderIncomesList = () => {
@@ -62,6 +76,7 @@ const renderIncomesList = () => {
   incomes.forEach((income) => {
     addIncomeToList(income);
   });
+  calculateIncomesSum();
 };
 
 // EXPENSES:

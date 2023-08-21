@@ -8,6 +8,7 @@ export const editForm = document.getElementById("edit-form");
 export const incomeName = document.getElementById("income-name");
 export const incomeValue = document.getElementById("income-value");
 export const incomesList = document.getElementById("incomes-list");
+export const incomesSum = document.getElementById("incomes-sum");
 
 // const addIncomeButton = document.getElementById("add-income-button");
 export const incomesListContainer = document.getElementById(
