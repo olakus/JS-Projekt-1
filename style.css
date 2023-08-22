@@ -90,6 +90,20 @@ h2 {
   flex-direction: column;
 }
 
+.income-list-element-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10%;
+}
+
+/* .budget__incomes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10%;
+} */
+
 .budget__incomes,
 .budget__expenses {
   margin-top: 30px;
