@@ -30,26 +30,26 @@ export const addExpense = (e) => {
   expenseValue.value = "";
 };
 
-export const editIncomesList = (e) => {
+export const editExpensesList = (e) => {
   e.preventDefault();
   const idToEdit = e.target.id.split("-")[2];
   const nameValue = document.getElementById(`update-name-${idToEdit}`).value;
-  const incomeValue = document.getElementById(
-    `update-income-${idToEdit}`
+  const expenseValue = document.getElementById(
+    `update-expense-${idToEdit}`
   ).value;
-  if (nameValue && incomeValue) {
-    incomes = incomes.map((income) => {
-      if (income.id === idToEdit) {
+  if (nameValue && expenseValue) {
+    expense = expenses.map((expense) => {
+      if (expense.id === idToEdit) {
         return {
-          ...income,
+          ...expense,
           name: nameValue,
-          value: Number(incomeValue),
+          value: Number(expenseValue),
         };
       }
-      return income;
+      return expense;
     });
 
     renderExpensesList();
   }
-  console.log(idToEdit, nameValue, incomeValue);
+  console.log(idToEdit, nameValue, expenseValue);
 };

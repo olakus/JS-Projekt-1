@@ -7,18 +7,23 @@ import {
   incomesList,
   incomesSum,
 } from "../main.js";
-import { incomes, expenses, editIncomesList } from "./actions.js";
+import {
+  incomes,
+  expenses,
+  editIncomesList,
+  editExpensesList,
+} from "./actions.js";
 
-export const deleteIncome = (e) => {
+export const deleteExpense = (e) => {
   e.preventDefault();
   const idToDelete = e.target.id;
-  const itemToDeleteIndex = incomes.findIndex((el) => el.id === idToDelete);
-  incomes.splice(itemToDeleteIndex, 1);
+  const itemToDeleteIndex = expenses.findIndex((el) => el.id === idToDelete);
+  expenses.splice(itemToDeleteIndex, 1);
 
-  renderIncomesList();
+  renderExpensesList();
 };
 
-const editIncome = (e) => {
+const editExpense = (e) => {
   editForm.style.display = "flex";
   const id = e.target.id;
 };
@@ -27,18 +32,15 @@ const renderUpdateInputs = (e) => {
   const id = e.target.id;
   const listElement = document.getElementById(id);
 
-  // const listElementWrapper = document.createElement("div");
-  // listElementWrapper.classList.add("income-list-element-wrapper");
-
   const updateInputsWrapper = document.createElement("div");
   updateInputsWrapper.id = `update-${id}`;
 
   const nameInput = document.createElement("input");
   nameInput.id = `update-name-${id}`;
 
-  const incomeInput = document.createElement("input");
-  incomeInput.type = "number";
-  incomeInput.id = `update-income-${id}`;
+  const expenseInput = document.createElement("input");
+  expenseInput.type = "number";
+  expenseInput.id = `update-expense-${id}`;
 
   const saveButton = document.createElement("button");
   saveButton.innerText = "SAVE";
@@ -49,7 +51,7 @@ const renderUpdateInputs = (e) => {
   cancelButton.id = `update-cancel-${id}`;
 
   updateInputsWrapper.appendChild(nameInput);
-  updateInputsWrapper.appendChild(incomeInput);
+  updateInputsWrapper.appendChild(expenseInput);
   updateInputsWrapper.appendChild(saveButton);
   updateInputsWrapper.appendChild(cancelButton);
 
@@ -57,23 +59,23 @@ const renderUpdateInputs = (e) => {
   listElement.appendChild(updateInputsWrapper);
 };
 
-export const addIncomeToList = (income) => {
+export const addExpenseToList = (expense) => {
   const listElement = document.createElement("li");
   listElement.classList.add(
     "flex",
     "flex--space-between",
     "budget__list__item"
   );
-  listElement.id = income.id;
+  listElement.id = expense.id;
 
   const listElementWrapper = document.createElement("div");
-  listElementWrapper.classList.add("income-list-element-wrapper");
+  listElementWrapper.classList.add("expenses-list-element-wrapper");
 
   const name = document.createElement("p");
-  name.innerText = income.name;
+  name.innerText = expense.name;
 
   const value = document.createElement("p");
-  value.innerText = income.value + " PLN";
+  value.innerText = expense.value + " PLN";
 
   const buttonsWrapper = document.createElement("div");
   buttonsWrapper.classList.add(
@@ -82,25 +84,24 @@ export const addIncomeToList = (income) => {
   );
 
   const editButton = document.createElement("button");
-  editButton.id = income.id; // dopisałam JP
+  editButton.id = expense.id; // dopisałam JP
   editButton.innerText = "Edytuj";
   editButton.type = "button";
-  editButton.addEventListener("click", editIncome); // to bylo wcześniej
+  editButton.addEventListener("click", editExpense); // to bylo wcześniej
   editButton.addEventListener("click", renderUpdateInputs);
 
   const removeButton = document.createElement("button");
   removeButton.type = "button";
-  removeButton.id = income.id; // CZY MOGE UŻYC TEN REMOVE BUTTON TEŻ W EXPENSES? odp: TAK
+  removeButton.id = expense.id; // CZY MOGE UŻYC TEN REMOVE BUTTON TEŻ W EXPENSES? odp: TAK
   removeButton.innerText = "Usuń";
-  removeButton.addEventListener("click", deleteIncome);
+  removeButton.addEventListener("click", deleteExpense);
 
   listElement.appendChild(name);
   listElement.appendChild(value);
   buttonsWrapper.appendChild(editButton);
   buttonsWrapper.appendChild(removeButton);
   listElement.appendChild(buttonsWrapper);
-  incomesList.appendChild(listElement);
-  // incomesListContainer.appendChild(listElement);
+  expensesList.appendChild(listElement);
 
   listElementWrapper.appendChild(name);
   listElementWrapper.appendChild(value);
@@ -109,9 +110,9 @@ export const addIncomeToList = (income) => {
   listElement.appendChild(listElementWrapper);
 
   cancelButton.addEventListener("click", cancelEditInputs);
-  saveButton.addEventListener("click", editIncomesList);
+  saveButton.addEventListener("click", editExpensesList);
 
-  calculateIncomesSum();
+  calculateExpensesSum();
 };
 
 const cancelEditInputs = (e) => {
@@ -123,20 +124,20 @@ const cancelEditInputs = (e) => {
   listElement.removeChild(updateElement);
 };
 
-const calculateIncomesSum = () => {
-  const _incomesSum = incomes.reduce((acc, income) => {
-    return acc + income.value;
+const calculateExpensesSum = () => {
+  const _expensesSum = expenses.reduce((acc, expense) => {
+    return acc + expense.value;
   }, 0);
 
-  incomesSum.innerText = _incomesSum;
+  expensesSum.innerText = _expensesSum;
 };
 
-const renderIncomesList = () => {
-  incomesListContainer.innerHTML = "";
-  incomes.forEach((income) => {
-    addIncomeToList(income);
+const renderExpensesList = () => {
+  expensesListContainer.innerHTML = "";
+  expenses.forEach((expense) => {
+    addExpenseToList(expense);
   });
-  calculateIncomesSum();
+  calculateExpensesSum();
 };
 
 // EXPENSES:
@@ -146,7 +147,6 @@ const deleteExpense = (e) => {
   console.log(e.target.id);
   const idToDelete = e.target.id;
   const itemToDeleteIndex = expenses.findIndex((el) => el.id === idToDelete);
-  // jest też const itemToDeleteIndex dla incomes. czy może tak być? odp: TAK
   expenses.splice(itemToDeleteIndex, 1);
   renderExpensesList();
 };

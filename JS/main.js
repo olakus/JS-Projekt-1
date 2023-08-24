@@ -9,6 +9,14 @@ export const incomeName = document.getElementById("income-name");
 export const incomeValue = document.getElementById("income-value");
 export const incomesList = document.getElementById("incomes-list");
 export const incomesSum = document.getElementById("incomes-sum");
+export const expensesList = document.getElementById("expenses-list");
+export const expensesSum = document.getElementById("expenses-sum");
+export const expenseName = document.getElementById("expense-name");
+export const expenseValue = document.getElementById("expense-value");
+const addIncomeButton = document.getElementById("add-income-button");
+const addExpenseButton = document.getElementById("add-expense-button");
+
+expensesList, expensesSum, expenseName, expenseValue;
 
 // const addIncomeButton = document.getElementById("add-income-button");
 export const incomesListContainer = document.getElementById(
