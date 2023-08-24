@@ -2,7 +2,7 @@
 
 import { addIncome, addExpense } from "./incomes/actions.js"; // dopisałam: addExpense
 
-export const editForm = document.getElementById("edit-form");
+// export const editForm = document.getElementById("edit-form");
 
 // INCOMES:
 export const incomeName = document.getElementById("income-name");
@@ -16,8 +16,6 @@ export const expenseValue = document.getElementById("expense-value");
 const addIncomeButton = document.getElementById("add-income-button");
 const addExpenseButton = document.getElementById("add-expense-button");
 
-expensesList, expensesSum, expenseName, expenseValue;
-
 // const addIncomeButton = document.getElementById("add-income-button");
 export const incomesListContainer = document.getElementById(
   "incomes-list-container"
@@ -26,9 +24,9 @@ export const incomesListContainer = document.getElementById(
 incomesList.addEventListener("submit", addIncome);
 
 // EXPENSES (dopisałam):
-export const expenseName = document.getElementById("expense-name");
-export const expenseValue = document.getElementById("expense-value");
-export const expensesList = document.getElementById("expenses-list");
+// export const expenseName = document.getElementById("expense-name");
+// export const expenseValue = document.getElementById("expense-value");
+// export const expensesList = document.getElementById("expenses-list");
 
 export const expensesListContainer = document.getElementById(
   "expenses-list-container"

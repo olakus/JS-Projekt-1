@@ -68,8 +68,8 @@ export const addExpenseToList = (expense) => {
   );
   listElement.id = expense.id;
 
-  const listElementWrapper = document.createElement("div");
-  listElementWrapper.classList.add("expenses-list-element-wrapper");
+  // const listElementWrapper = document.createElement("div");
+  // listElementWrapper.classList.add("expenses-list-element-wrapper");
 
   const name = document.createElement("p");
   name.innerText = expense.name;
@@ -101,16 +101,16 @@ export const addExpenseToList = (expense) => {
   buttonsWrapper.appendChild(editButton);
   buttonsWrapper.appendChild(removeButton);
   listElement.appendChild(buttonsWrapper);
-  expensesList.appendChild(listElement);
+  expensesListContainer.appendChild(listElement);
 
-  listElementWrapper.appendChild(name);
-  listElementWrapper.appendChild(value);
-  listElementWrapper.appendChild(buttonsWrapper);
+  // listElementWrapper.appendChild(name);
+  // listElementWrapper.appendChild(value);
+  // listElementWrapper.appendChild(buttonsWrapper);
 
-  listElement.appendChild(listElementWrapper);
+  // listElement.appendChild(listElementWrapper);
 
-  cancelButton.addEventListener("click", cancelEditInputs);
-  saveButton.addEventListener("click", editExpensesList);
+  // cancelButton.addEventListener("click", cancelEditInputs);
+  // saveButton.addEventListener("click", editExpensesList);
 
   calculateExpensesSum();
 };
@@ -151,48 +151,48 @@ const deleteExpense = (e) => {
   renderExpensesList();
 };
 
-const renderExpensesList = () => {
-  expensesListContainer.innerHTML = "";
-  expenses.forEach((expense) => {
-    addExpenseToList(expense);
-  });
-};
+// const renderExpensesList = () => {
+//   expensesListContainer.innerHTML = "";
+//   expenses.forEach((expense) => {
+//     addExpenseToList(expense);
+//   });
+// };
 
-export const addExpenseToList = (expense) => {
-  const listElement = document.createElement("li");
-  listElement.classList.add(
-    "flex",
-    "flex--space-between",
-    "budget__list__item"
-  );
-  listElement.id = expense.id;
+// export const addExpenseToList = (expense) => {
+//   const listElement = document.createElement("li");
+//   listElement.classList.add(
+//     "flex",
+//     "flex--space-between",
+//     "budget__list__item"
+//   );
+//   listElement.id = expense.id;
 
-  const name = document.createElement("p");
-  name.innerText = expense.name;
+//   const name = document.createElement("p");
+//   name.innerText = expense.name;
 
-  const value = document.createElement("p");
-  value.innerText = expense.value + " PLN";
+//   const value = document.createElement("p");
+//   value.innerText = expense.value + " PLN";
 
-  const buttonsWrapper = document.createElement("div");
-  buttonsWrapper.classList.add(
-    "budget__list__item__button",
-    "budget__list__item__button--edit"
-  );
+//   const buttonsWrapper = document.createElement("div");
+//   buttonsWrapper.classList.add(
+//     "budget__list__item__button",
+//     "budget__list__item__button--edit"
+//   );
 
-  const editButton = document.createElement("button");
-  editButton.innerText = "Edytuj";
-  editButton.type = "button";
+//   const editButton = document.createElement("button");
+//   editButton.innerText = "Edytuj";
+//   editButton.type = "button";
 
-  const removeButton = document.createElement("button");
-  removeButton.type = "button";
-  removeButton.id = expense.id;
-  removeButton.innerText = "Usuń";
-  removeButton.addEventListener("click", deleteExpense);
+//   const removeButton = document.createElement("button");
+//   removeButton.type = "button";
+//   removeButton.id = expense.id;
+//   removeButton.innerText = "Usuń";
+//   removeButton.addEventListener("click", deleteExpense);
 
-  listElement.appendChild(name);
-  listElement.appendChild(value);
-  buttonsWrapper.appendChild(editButton);
-  buttonsWrapper.appendChild(removeButton);
-  listElement.appendChild(buttonsWrapper);
-  expensesListContainer.appendChild(listElement);
-};
+//   listElement.appendChild(name);
+//   listElement.appendChild(value);
+//   buttonsWrapper.appendChild(editButton);
+//   buttonsWrapper.appendChild(removeButton);
+//   listElement.appendChild(buttonsWrapper);
+//   expensesListContainer.appendChild(listElement);
+// };

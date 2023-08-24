@@ -3,7 +3,6 @@
 import {
   incomesListContainer,
   expensesListContainer,
-  editForm,
   incomesList,
   incomesSum,
 } from "../main.js";
@@ -18,35 +17,56 @@ export const deleteIncome = (e) => {
   renderIncomesList();
 };
 
-const editIncome = (e) => {
-  editForm.style.display = "flex";
-  const id = e.target.id;
-};
+// const editIncome = (e) => {
+//   const id = e.target.id;
+// };
 
 const renderUpdateInputs = (e) => {
   const id = e.target.id;
+  const editingIncome = incomes.find((el) => el.id === id);
   const listElement = document.getElementById(id);
+  const elementsToHide = document.getElementById(`list-element-wrapper-${id}`);
+  elementsToHide.style.display = "none";
 
   // const listElementWrapper = document.createElement("div");
   // listElementWrapper.classList.add("income-list-element-wrapper");
 
-  const updateInputsWrapper = document.createElement("div");
+  const updateInputsWrapper = document.createElement("form");
   updateInputsWrapper.id = `update-${id}`;
 
   const nameInput = document.createElement("input");
   nameInput.id = `update-name-${id}`;
+  nameInput.minLength = 3;
+  nameInput.required = true;
+  nameInput.value = editingIncome.name;
 
   const incomeInput = document.createElement("input");
   incomeInput.type = "number";
   incomeInput.id = `update-income-${id}`;
+  incomeInput.min = "0.01";
+  incomeInput.step = "0.01";
+  incomeInput.required = true;
+  incomeInput.value = editingIncome.value;
 
   const saveButton = document.createElement("button");
   saveButton.innerText = "SAVE";
   saveButton.id = `update-save-${id}`;
+  saveButton.type = "submit";
+  updateInputsWrapper.addEventListener("submit", (event) => {
+    event.preventDefault();
+    editingIncome.name = nameInput.value;
+    editingIncome.value = incomeInput.value;
+    renderIncomesList();
+  });
 
   const cancelButton = document.createElement("button");
   cancelButton.innerText = "CANCEL";
   cancelButton.id = `update-cancel-${id}`;
+  cancelButton.type = "button";
+  cancelButton.addEventListener("click", () => {
+    elementsToHide.style.display = "flex";
+    updateInputsWrapper.remove();
+  });
 
   updateInputsWrapper.appendChild(nameInput);
   updateInputsWrapper.appendChild(incomeInput);
@@ -67,6 +87,7 @@ export const addIncomeToList = (income) => {
   listElement.id = income.id;
 
   const listElementWrapper = document.createElement("div");
+  listElementWrapper.id = `list-element-wrapper-${income.id}`;
   listElementWrapper.classList.add("income-list-element-wrapper");
 
   const name = document.createElement("p");
@@ -85,7 +106,6 @@ export const addIncomeToList = (income) => {
   editButton.id = income.id; // dopisałam JP
   editButton.innerText = "Edytuj";
   editButton.type = "button";
-  editButton.addEventListener("click", editIncome); // to bylo wcześniej
   editButton.addEventListener("click", renderUpdateInputs);
 
   const removeButton = document.createElement("button");
@@ -94,13 +114,11 @@ export const addIncomeToList = (income) => {
   removeButton.innerText = "Usuń";
   removeButton.addEventListener("click", deleteIncome);
 
-  listElement.appendChild(name);
-  listElement.appendChild(value);
+  // listElement.appendChild(name);
+  // listElement.appendChild(value);
   buttonsWrapper.appendChild(editButton);
   buttonsWrapper.appendChild(removeButton);
-  listElement.appendChild(buttonsWrapper);
-  incomesList.appendChild(listElement);
-  // incomesListContainer.appendChild(listElement);
+  // listElement.appendChild(buttonsWrapper);
 
   listElementWrapper.appendChild(name);
   listElementWrapper.appendChild(value);
@@ -108,8 +126,9 @@ export const addIncomeToList = (income) => {
 
   listElement.appendChild(listElementWrapper);
 
-  cancelButton.addEventListener("click", cancelEditInputs);
-  saveButton.addEventListener("click", editIncomesList);
+  incomesListContainer.appendChild(listElement);
+  // cancelButton.addEventListener("click", cancelEditInputs);
+  // saveButton.addEventListener("click", editIncomesList);
 
   calculateIncomesSum();
 };
@@ -125,7 +144,7 @@ const cancelEditInputs = (e) => {
 
 const calculateIncomesSum = () => {
   const _incomesSum = incomes.reduce((acc, income) => {
-    return acc + income.value;
+    return acc + Number(income.value);
   }, 0);
 
   incomesSum.innerText = _incomesSum;
