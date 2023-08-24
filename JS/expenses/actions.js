@@ -10,24 +10,6 @@ import {
 } from "../main.js";
 import { addIncomeToList, addExpenseToList } from "./updates.js";
 
-export let incomes = [];
-
-export const addIncome = (e) => {
-  e.preventDefault();
-
-  const _income = {
-    name: incomeName.value,
-    value: Number(incomeValue.value),
-    id: Math.random().toString(),
-  };
-
-  incomes.push(_income);
-  addIncomeToList(_income);
-
-  incomeName.value = "";
-  incomeValue.value = "";
-};
-
 // EXPENSES (DOPISAŁAM)
 
 export let expenses = [];
@@ -67,7 +49,7 @@ export const editIncomesList = (e) => {
       return income;
     });
 
-    renderIncomesList();
+    renderExpensesList();
   }
   console.log(idToEdit, nameValue, incomeValue);
 };
