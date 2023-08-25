@@ -8,9 +8,7 @@ import {
   expenseValue,
   expensesList,
 } from "../main.js";
-import { addIncomeToList, addExpenseToList } from "./updates.js";
-
-// EXPENSES (DOPISAŁAM)
+import { addIncomeToList, addExpenseToList } from "./e-updates.js";
 
 export let expenses = [];
 

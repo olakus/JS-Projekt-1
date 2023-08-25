@@ -6,7 +6,7 @@ import {
   incomesList,
   incomesSum,
 } from "../main.js";
-import { incomes, expenses, editIncomesList } from "./actions.js";
+import { incomes, expenses, editIncomesList } from "./i-actions.js";
 
 export const deleteIncome = (e) => {
   e.preventDefault();
@@ -17,10 +17,6 @@ export const deleteIncome = (e) => {
   renderIncomesList();
 };
 
-// const editIncome = (e) => {
-//   const id = e.target.id;
-// };
-
 const renderUpdateInputs = (e) => {
   const id = e.target.id;
   const editingIncome = incomes.find((el) => el.id === id);
@@ -28,12 +24,8 @@ const renderUpdateInputs = (e) => {
   const elementsToHide = document.getElementById(`list-element-wrapper-${id}`);
   elementsToHide.style.display = "none";
 
-  // const listElementWrapper = document.createElement("div");
-  // listElementWrapper.classList.add("income-list-element-wrapper");
-
   const updateInputsWrapper = document.createElement("form");
   updateInputsWrapper.id = `update-${id}`;
-
   const nameInput = document.createElement("input");
   nameInput.id = `update-name-${id}`;
   nameInput.minLength = 3;
@@ -49,7 +41,7 @@ const renderUpdateInputs = (e) => {
   incomeInput.value = editingIncome.value;
 
   const saveButton = document.createElement("button");
-  saveButton.innerText = "SAVE";
+  saveButton.innerText = "Save";
   saveButton.id = `update-save-${id}`;
   saveButton.type = "submit";
   updateInputsWrapper.addEventListener("submit", (event) => {
@@ -60,7 +52,7 @@ const renderUpdateInputs = (e) => {
   });
 
   const cancelButton = document.createElement("button");
-  cancelButton.innerText = "CANCEL";
+  cancelButton.innerText = "Cancel";
   cancelButton.id = `update-cancel-${id}`;
   cancelButton.type = "button";
   cancelButton.addEventListener("click", () => {
@@ -73,7 +65,6 @@ const renderUpdateInputs = (e) => {
   updateInputsWrapper.appendChild(saveButton);
   updateInputsWrapper.appendChild(cancelButton);
 
-  // listElementWrapper.appendChild(updateInputsWrapper);
   listElement.appendChild(updateInputsWrapper);
 };
 
@@ -103,22 +94,19 @@ export const addIncomeToList = (income) => {
   );
 
   const editButton = document.createElement("button");
-  editButton.id = income.id; // dopisałam JP
-  editButton.innerText = "Edytuj";
+  editButton.id = income.id;
+  editButton.innerText = "Edit";
   editButton.type = "button";
   editButton.addEventListener("click", renderUpdateInputs);
 
   const removeButton = document.createElement("button");
   removeButton.type = "button";
-  removeButton.id = income.id; // CZY MOGE UŻYC TEN REMOVE BUTTON TEŻ W EXPENSES? odp: TAK
-  removeButton.innerText = "Usuń";
+  removeButton.id = income.id;
+  removeButton.innerText = "Delete";
   removeButton.addEventListener("click", deleteIncome);
 
-  // listElement.appendChild(name);
-  // listElement.appendChild(value);
   buttonsWrapper.appendChild(editButton);
   buttonsWrapper.appendChild(removeButton);
-  // listElement.appendChild(buttonsWrapper);
 
   listElementWrapper.appendChild(name);
   listElementWrapper.appendChild(value);
@@ -127,8 +115,6 @@ export const addIncomeToList = (income) => {
   listElement.appendChild(listElementWrapper);
 
   incomesListContainer.appendChild(listElement);
-  // cancelButton.addEventListener("click", cancelEditInputs);
-  // saveButton.addEventListener("click", editIncomesList);
 
   calculateIncomesSum();
 };
@@ -158,17 +144,15 @@ const renderIncomesList = () => {
   calculateIncomesSum();
 };
 
-// EXPENSES:
-
-// DOPISAŁAM funkcję:
-const deleteExpense = (e) => {
-  console.log(e.target.id);
-  const idToDelete = e.target.id;
-  const itemToDeleteIndex = expenses.findIndex((el) => el.id === idToDelete);
-  // jest też const itemToDeleteIndex dla incomes. czy może tak być? odp: TAK
-  expenses.splice(itemToDeleteIndex, 1);
-  renderExpensesList();
-};
+//-----------
+// const deleteExpense = (e) => {
+//   console.log(e.target.id);
+//   const idToDelete = e.target.id;
+//   const itemToDeleteIndex = expenses.findIndex((el) => el.id === idToDelete);
+//   expenses.splice(itemToDeleteIndex, 1);
+//   renderExpensesList();
+// };
+//-----------
 
 const renderExpensesList = () => {
   expensesListContainer.innerHTML = "";

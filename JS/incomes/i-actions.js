@@ -8,7 +8,7 @@ import {
   expenseValue,
   expensesList,
 } from "../main.js";
-import { addIncomeToList, addExpenseToList } from "./updates.js";
+import { addIncomeToList, addExpenseToList } from "./i-updates.js";
 
 export let incomes = [];
 
@@ -27,8 +27,6 @@ export const addIncome = (e) => {
   incomeName.value = "";
   incomeValue.value = "";
 };
-
-// EXPENSES (DOPISAŁAM)
 
 export let expenses = [];
 

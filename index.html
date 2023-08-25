@@ -20,9 +20,8 @@
         <h1 class="text--center">Home budget</h1>
         <div class="app__logo"><img src="./accounting.png" /></div>
         <div id="budgetState" class="budget__state budget__state--success">
-          <p class="text--center">
-            You can still spend
-            <span id="budgetValue">987</span> PLN
+          <p id="budget-text" class="text--center">
+            <span id="budget-value"></span>
           </p>
         </div>
       </header>
@@ -84,7 +83,7 @@
           </form>
           <ul id="expenses-list-container" class="budget__list"></ul>
           <p class="budget__list__summary">
-            Expenses sum: <span id="expenses-sum">5500</span> PLN
+            Expenses sum: <span id="expenses-sum"></span> PLN
           </p>
         </div>
       </section>
@@ -99,27 +98,6 @@
         >Accounting icons created by Eucalyp - Flaticon</a
       >
     </footer>
-
-    <!-- <form id="edit-form" class="edit-form">
-      <div>
-        <label for="edit-form-name">Nazwa</label>
-        <input type="text" id="edit-form-name" minlength="3" required />
-      </div>
-      <div>
-        <label for="edit-form-amount">Kwota</label>
-        <input
-          type="number"
-          id="edit-form-amount"
-          min="0.01"
-          step="0.01"
-          required
-        />
-      </div>
-      <div>
-        <button type="submit">Zapisz</button>
-        <button type="button">Anuluj</button>
-      </div>
-    </form> -->
 
     <script src="JS/main.js" type="module"></script>
   </body>
