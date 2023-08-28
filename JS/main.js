@@ -1,6 +1,6 @@
 "use strict";
 
-import { addIncome, addExpense } from "./incomes/incomes-actions.js";
+import { addIncome, addExpense } from "./incomes/incomes-actions.js"; // dopisałam: addExpense
 
 export const incomeName = document.getElementById("income-name");
 export const incomeValue = document.getElementById("income-value");
@@ -40,6 +40,8 @@ export const calculateBudgetValue = () => {
     budgetText.innerText = `Income and expenses are equal`;
   }
 };
+
+// Gdy odkomentuję ten kod, to psuje się sumowanie Incomes i Expenses:
 
 // const calculateBudgetValue = () => {
 //   const totalBalance = calculateIncomesSum.reduce((acc, income) => {
