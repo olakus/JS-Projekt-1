@@ -1,6 +1,6 @@
 "use strict";
 
-import { addIncome, addExpense } from "./incomes/i-actions.js";
+import { addIncome, addExpense } from "./incomes/incomes-actions.js";
 
 export const incomeName = document.getElementById("income-name");
 export const incomeValue = document.getElementById("income-value");
@@ -27,23 +27,21 @@ export const expensesListContainer = document.getElementById(
 
 expensesList.addEventListener("submit", addExpense);
 
-export const calculatebudgetValue = () => {
+export const calculateBudgetValue = () => {
   const expense = Number(expensesSum.innerText);
   const income = Number(incomesSum.innerText);
-  if (outcome > income) {
+  if (expense > income) {
     budgetText.innerText = `You spent too much, you are in the minus by ${
       expense - income
     } PLN`;
-    expense - income;
   } else if (income > expense) {
     budgetText.innerText = `You can still spend ${income - expense} PLN`;
   } else {
-    income === expense;
     budgetText.innerText = `Income and expenses are equal`;
   }
 };
 
-// const calculatebudgetValue = () => {
+// const calculateBudgetValue = () => {
 //   const totalBalance = calculateIncomesSum.reduce((acc, income) => {
 //     return acc + Number(income.value);
 //   }, 0);

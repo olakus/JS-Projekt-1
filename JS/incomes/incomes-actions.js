@@ -8,7 +8,7 @@ import {
   expenseValue,
   expensesList,
 } from "../main.js";
-import { addIncomeToList, addExpenseToList } from "./i-updates.js";
+import { addIncomeToList, addExpenseToList } from "./incomes-updates.js";
 
 export let incomes = [];
 
@@ -28,23 +28,23 @@ export const addIncome = (e) => {
   incomeValue.value = "";
 };
 
-export let expenses = [];
+// export let expenses = [];
 
-export const addExpense = (e) => {
-  e.preventDefault();
+// export const addExpense = (e) => {
+//   e.preventDefault();
 
-  const _expense = {
-    name: expenseName.value,
-    value: Number(expenseValue.value),
-    id: Math.random().toString(),
-  };
+//   const _expense = {
+//     name: expenseName.value,
+//     value: Number(expenseValue.value),
+//     id: Math.random().toString(),
+//   };
 
-  expenses.push(_expense);
-  addExpenseToList(_expense);
+//   expenses.push(_expense);
+//   addExpenseToList(_expense);
 
-  expenseName.value = "";
-  expenseValue.value = "";
-};
+//   expenseName.value = "";
+//   expenseValue.value = "";
+// };
 
 export const editIncomesList = (e) => {
   e.preventDefault();
