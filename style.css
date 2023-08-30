@@ -141,10 +141,11 @@ h2 {
   font-weight: 700;
 }
 
-footer {
+.icon__credentials {
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
   font-size: var(--font-s);
   padding: 20px;
 }

@@ -1,14 +1,7 @@
 "use strict";
 
-import {
-  incomeName,
-  incomeValue,
-  incomesList,
-  expenseName,
-  expenseValue,
-  expensesList,
-} from "../main.js";
-import { renderIncomesList, renderExpensesList } from "./incomes-updates.js";
+import { incomeName, incomeValue, expenseName, expenseValue } from "./main.js";
+import { renderIncomesList, renderExpensesList } from "./updates.js";
 
 export let incomes = [];
 
@@ -22,7 +15,6 @@ export const addIncome = (e) => {
   };
 
   incomes.push(_income);
-  // addIncomeToList(_income);
   renderIncomesList();
 
   incomeName.value = "";
@@ -52,8 +44,6 @@ export const editIncomesList = (e) => {
   console.log(idToEdit, nameValue, incomeValue);
 };
 
-// EXPENSES
-
 export let expenses = [];
 
 export const addExpense = (e) => {
@@ -64,13 +54,11 @@ export const addExpense = (e) => {
     id: Math.random().toString(),
   };
   expenses.push(_expense);
-  // addExpenseToList(_expense);
   renderExpensesList();
   expenseName.value = "";
   expenseValue.value = "";
 };
 
-// dopisalam 28.08:
 export const editExpensesList = (e) => {
   e.preventDefault();
   const idToEdit = e.target.id.split("-")[2];

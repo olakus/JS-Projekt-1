@@ -6,8 +6,8 @@ import {
   expensesListContainer,
   incomesSum,
   expensesSum,
-} from "../main.js";
-import { incomes, expenses } from "./incomes-actions.js";
+} from "./main.js";
+import { incomes, expenses } from "./actions.js";
 
 export const deleteIncome = (e) => {
   e.preventDefault();
@@ -69,8 +69,6 @@ const renderUpdateIncomeInputs = (e) => {
   listElement.appendChild(updateInputsWrapper);
 };
 
-// -----------------
-
 const renderUpdateExpenseInputs = (e) => {
   const id = e.target.id;
   const editingExpense = expenses.find((el) => el.id === id);
@@ -123,8 +121,6 @@ const renderUpdateExpenseInputs = (e) => {
   listElement.appendChild(updateInputsWrapper);
 };
 
-// -------------
-
 export const addIncomeToList = (income) => {
   const listElement = document.createElement("li");
   listElement.classList.add(
@@ -174,15 +170,6 @@ export const addIncomeToList = (income) => {
   incomesListContainer.appendChild(listElement);
 };
 
-const cancelEditInputs = (e) => {
-  e.preventDefault();
-
-  const id = e.target.id.split("-")[2];
-  const listElement = document.getElementById(id);
-  const updateElement = document.getElementById(`update-${id}`);
-  listElement.removeChild(updateElement);
-};
-
 const calculateIncomesSum = () => {
   const _incomesSum = incomes.reduce((acc, income) => {
     return acc + Number(income.value);
@@ -207,9 +194,6 @@ export const renderIncomesList = () => {
   calculateBudgetValue();
 };
 
-// EXPENSES:
-
-//-----------
 const deleteExpense = (e) => {
   console.log(e.target.id);
   const idToDelete = e.target.id;
@@ -217,7 +201,6 @@ const deleteExpense = (e) => {
   expenses.splice(itemToDeleteIndex, 1);
   renderExpensesList();
 };
-//-----------
 
 export const renderExpensesList = () => {
   expensesListContainer.innerHTML = "";
@@ -255,14 +238,14 @@ export const addExpenseToList = (expense) => {
 
   const editButton = document.createElement("button");
   editButton.id = expense.id;
-  editButton.innerText = "Edytuj";
+  editButton.innerText = "Edit";
   editButton.type = "button";
   editButton.addEventListener("click", renderUpdateExpenseInputs);
 
   const removeButton = document.createElement("button");
   removeButton.type = "button";
   removeButton.id = expense.id;
-  removeButton.innerText = "Usuń";
+  removeButton.innerText = "Delete";
   removeButton.addEventListener("click", deleteExpense);
 
   buttonsWrapper.appendChild(editButton);
@@ -274,6 +257,4 @@ export const addExpenseToList = (expense) => {
   listElementWrapper.appendChild(buttonsWrapper);
   listElement.appendChild(listElementWrapper);
   expensesListContainer.appendChild(listElement);
-
-  // calculateExpensesSum();
 };
