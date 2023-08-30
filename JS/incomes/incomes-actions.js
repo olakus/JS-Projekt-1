@@ -8,7 +8,7 @@ import {
   expenseValue,
   expensesList,
 } from "../main.js";
-import { addIncomeToList, addExpenseToList } from "./incomes-updates.js";
+import { renderIncomesList, renderExpensesList } from "./incomes-updates.js";
 
 export let incomes = [];
 
@@ -22,7 +22,8 @@ export const addIncome = (e) => {
   };
 
   incomes.push(_income);
-  addIncomeToList(_income);
+  // addIncomeToList(_income);
+  renderIncomesList();
 
   incomeName.value = "";
   incomeValue.value = "";
@@ -63,7 +64,8 @@ export const addExpense = (e) => {
     id: Math.random().toString(),
   };
   expenses.push(_expense);
-  addExpenseToList(_expense);
+  // addExpenseToList(_expense);
+  renderExpensesList();
   expenseName.value = "";
   expenseValue.value = "";
 };

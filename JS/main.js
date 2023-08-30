@@ -1,6 +1,11 @@
 "use strict";
 
-import { addIncome, addExpense } from "./incomes/incomes-actions.js"; // dopisałam: addExpense
+import {
+  incomes,
+  expenses,
+  addIncome,
+  addExpense,
+} from "./incomes/incomes-actions.js"; // dopisałam: addExpense
 
 export const incomeName = document.getElementById("income-name");
 export const incomeValue = document.getElementById("income-value");
@@ -28,8 +33,14 @@ export const expensesListContainer = document.getElementById(
 expensesList.addEventListener("submit", addExpense);
 
 export const calculateBudgetValue = () => {
-  const expense = Number(expensesSum.innerText);
-  const income = Number(incomesSum.innerText);
+  const income = incomes.reduce((acc, income) => {
+    return acc + Number(income.value);
+  }, 0);
+
+  const expense = expenses.reduce((acc, expense) => {
+    return acc + Number(expense.value);
+  }, 0);
+
   if (expense > income) {
     budgetText.innerText = `You spent too much, you are in the minus by ${
       expense - income
@@ -40,6 +51,20 @@ export const calculateBudgetValue = () => {
     budgetText.innerText = `Income and expenses are equal`;
   }
 };
+
+// export const calculateBudgetValue = () => {
+//   const expense = Number(expensesSum.innerText);
+//   const income = Number(incomesSum.innerText);
+//   if (expense > income) {
+//     budgetText.innerText = `You spent too much, you are in the minus by ${
+//       expense - income
+//     } PLN`;
+//   } else if (income > expense) {
+//     budgetText.innerText = `You can still spend ${income - expense} PLN`;
+//   } else {
+//     budgetText.innerText = `Income and expenses are equal`;
+//   }
+// };
 
 // Gdy odkomentuję ten kod, to psuje się sumowanie Incomes i Expenses:
 

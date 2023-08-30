@@ -1,12 +1,13 @@
 "use strict";
 
 import {
+  calculateBudgetValue,
   incomesListContainer,
   expensesListContainer,
-  incomesList,
   incomesSum,
+  expensesSum,
 } from "../main.js";
-import { incomes, expenses, editIncomesList } from "./incomes-actions.js";
+import { incomes, expenses } from "./incomes-actions.js";
 
 export const deleteIncome = (e) => {
   e.preventDefault();
@@ -17,7 +18,7 @@ export const deleteIncome = (e) => {
   renderIncomesList();
 };
 
-const renderUpdateInputs = (e) => {
+const renderUpdateIncomeInputs = (e) => {
   const id = e.target.id;
   const editingIncome = incomes.find((el) => el.id === id);
   const listElement = document.getElementById(id);
@@ -68,6 +69,62 @@ const renderUpdateInputs = (e) => {
   listElement.appendChild(updateInputsWrapper);
 };
 
+// -----------------
+
+const renderUpdateExpenseInputs = (e) => {
+  const id = e.target.id;
+  const editingExpense = expenses.find((el) => el.id === id);
+  const listElement = document.getElementById(id);
+  console.log(id);
+  const elementsToHide = document.getElementById(`list-element-wrapper-${id}`);
+  elementsToHide.style.display = "none";
+
+  const updateInputsWrapper = document.createElement("form");
+  updateInputsWrapper.id = `update-${id}`;
+  const nameInput = document.createElement("input");
+  nameInput.id = `update-name-${id}`;
+  nameInput.minLength = 3;
+  nameInput.required = true;
+  nameInput.value = editingExpense.name;
+
+  const expenseInput = document.createElement("input");
+  expenseInput.type = "number";
+  expenseInput.id = `update-expense-${id}`;
+  expenseInput.min = "0.01";
+  expenseInput.step = "0.01";
+  expenseInput.required = true;
+  expenseInput.value = editingExpense.value;
+
+  const saveButton = document.createElement("button");
+  saveButton.innerText = "Save";
+  saveButton.id = `update-save-${id}`;
+  saveButton.type = "submit";
+  updateInputsWrapper.addEventListener("submit", (event) => {
+    event.preventDefault();
+    editingExpense.name = nameInput.value;
+    editingExpense.value = expenseInput.value;
+    renderExpensesList();
+  });
+
+  const cancelButton = document.createElement("button");
+  cancelButton.innerText = "Cancel";
+  cancelButton.id = `update-cancel-${id}`;
+  cancelButton.type = "button";
+  cancelButton.addEventListener("click", () => {
+    elementsToHide.style.display = "flex";
+    updateInputsWrapper.remove();
+  });
+
+  updateInputsWrapper.appendChild(nameInput);
+  updateInputsWrapper.appendChild(expenseInput);
+  updateInputsWrapper.appendChild(saveButton);
+  updateInputsWrapper.appendChild(cancelButton);
+
+  listElement.appendChild(updateInputsWrapper);
+};
+
+// -------------
+
 export const addIncomeToList = (income) => {
   const listElement = document.createElement("li");
   listElement.classList.add(
@@ -97,7 +154,7 @@ export const addIncomeToList = (income) => {
   editButton.id = income.id;
   editButton.innerText = "Edit";
   editButton.type = "button";
-  editButton.addEventListener("click", renderUpdateInputs);
+  editButton.addEventListener("click", renderUpdateIncomeInputs);
 
   const removeButton = document.createElement("button");
   removeButton.type = "button";
@@ -115,8 +172,6 @@ export const addIncomeToList = (income) => {
   listElement.appendChild(listElementWrapper);
 
   incomesListContainer.appendChild(listElement);
-
-  calculateIncomesSum();
 };
 
 const cancelEditInputs = (e) => {
@@ -136,12 +191,20 @@ const calculateIncomesSum = () => {
   incomesSum.innerText = _incomesSum;
 };
 
-const renderIncomesList = () => {
+const calculateExpensesSum = () => {
+  const _expensesSum = expenses.reduce((acc, expense) => {
+    return acc + Number(expense.value);
+  }, 0);
+  expensesSum.innerText = _expensesSum;
+};
+
+export const renderIncomesList = () => {
   incomesListContainer.innerHTML = "";
   incomes.forEach((income) => {
     addIncomeToList(income);
   });
   calculateIncomesSum();
+  calculateBudgetValue();
 };
 
 // EXPENSES:
@@ -156,11 +219,13 @@ const deleteExpense = (e) => {
 };
 //-----------
 
-const renderExpensesList = () => {
+export const renderExpensesList = () => {
   expensesListContainer.innerHTML = "";
   expenses.forEach((expense) => {
     addExpenseToList(expense);
   });
+  calculateExpensesSum();
+  calculateBudgetValue();
 };
 
 export const addExpenseToList = (expense) => {
@@ -171,6 +236,10 @@ export const addExpenseToList = (expense) => {
     "budget__list__item"
   );
   listElement.id = expense.id;
+
+  const listElementWrapper = document.createElement("div");
+  listElementWrapper.id = `list-element-wrapper-${expense.id}`;
+  listElementWrapper.classList.add("expense-list-element-wrapper");
 
   const name = document.createElement("p");
   name.innerText = expense.name;
@@ -185,8 +254,10 @@ export const addExpenseToList = (expense) => {
   );
 
   const editButton = document.createElement("button");
+  editButton.id = expense.id;
   editButton.innerText = "Edytuj";
   editButton.type = "button";
+  editButton.addEventListener("click", renderUpdateExpenseInputs);
 
   const removeButton = document.createElement("button");
   removeButton.type = "button";
@@ -194,10 +265,15 @@ export const addExpenseToList = (expense) => {
   removeButton.innerText = "Usuń";
   removeButton.addEventListener("click", deleteExpense);
 
-  listElement.appendChild(name);
-  listElement.appendChild(value);
   buttonsWrapper.appendChild(editButton);
   buttonsWrapper.appendChild(removeButton);
-  listElement.appendChild(buttonsWrapper);
+
+  listElementWrapper.appendChild(name);
+  listElementWrapper.appendChild(value);
+
+  listElementWrapper.appendChild(buttonsWrapper);
+  listElement.appendChild(listElementWrapper);
   expensesListContainer.appendChild(listElement);
+
+  // calculateExpensesSum();
 };

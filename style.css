@@ -79,7 +79,8 @@ h2 {
   flex-direction: column;
 }
 
-.income-list-element-wrapper {
+.income-list-element-wrapper,
+.expense-list-element-wrapper {
   display: flex;
   width: 100%;
   align-items: center;
