@@ -41,7 +41,6 @@ export const editIncomesList = (e) => {
     });
     renderIncomesList();
   }
-  console.log(idToEdit, nameValue, incomeValue);
 };
 
 export let expenses = [];
@@ -67,7 +66,7 @@ export const editExpensesList = (e) => {
     `update-expense-${idToEdit}`
   ).value;
   if (nameValue && expenseValue) {
-    expense = expenses.map((expense) => {
+    expenses = expenses.map((expense) => {
       if (expense.id === idToEdit) {
         return {
           ...expense,
@@ -80,5 +79,4 @@ export const editExpensesList = (e) => {
 
     renderExpensesList();
   }
-  console.log(idToEdit, nameValue, expenseValue);
 };

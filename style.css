@@ -1,5 +1,9 @@
 @import "./variables.css";
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   background-image: linear-gradient(
     to bottom right,
@@ -14,14 +18,6 @@ html {
   font-family: Roboto, sans-serif;
 }
 
-input {
-  margin: 5px 0;
-}
-
-main {
-  min-height: 100vh;
-}
-
 .container {
   width: 80%;
   margin: 0 auto;
@@ -34,6 +30,13 @@ main {
 
 .flex--space-between {
   justify-content: space-between;
+}
+
+.header-one {
+  color: var(--navy);
+  font-size: var(--font-xl);
+  font-weight: 700;
+  color: #000080;
 }
 
 .text--center {
@@ -53,24 +56,14 @@ main {
   opacity: 90%;
 }
 
-h1 {
-  color: var(--navy);
-  font-size: var(--font-xl);
-  font-weight: 700;
-  color: #000080;
-}
-
-h2 {
+.header-two {
   font-size: var(--font-m);
   font-weight: 700;
 }
 
 .budget__state {
-  font-size: var(--font-l);
+  font-size: var(--font-m);
   font-weight: 700;
-}
-
-.budget__state--success {
   color: var(--darkblue);
 }
 
@@ -111,20 +104,24 @@ h2 {
 }
 
 .budget__list__form__input {
+  margin: 5px 0;
   font-size: var(--font-sm);
   line-height: 24px;
   border: 1px solid;
 }
 
 .budget__list__form__input--text {
+  margin: 5px 0;
   width: 270px;
 }
 
 .budget__list__form__input--number {
+  margin: 5px 0;
   width: 80px;
 }
 
 .budget__list__form__input__button {
+  margin: 5px 0;
   padding: 3px 20px;
   border: none;
   background-color: var(--deep-blue);

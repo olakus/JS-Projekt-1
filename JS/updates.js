@@ -73,7 +73,6 @@ const renderUpdateExpenseInputs = (e) => {
   const id = e.target.id;
   const editingExpense = expenses.find((el) => el.id === id);
   const listElement = document.getElementById(id);
-  console.log(id);
   const elementsToHide = document.getElementById(`list-element-wrapper-${id}`);
   elementsToHide.style.display = "none";
 
@@ -195,7 +194,6 @@ export const renderIncomesList = () => {
 };
 
 const deleteExpense = (e) => {
-  console.log(e.target.id);
   const idToDelete = e.target.id;
   const itemToDeleteIndex = expenses.findIndex((el) => el.id === idToDelete);
   expenses.splice(itemToDeleteIndex, 1);
